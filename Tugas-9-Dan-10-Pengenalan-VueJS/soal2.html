@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 2</title>
+</head>
+
+<body>
+  <div id="app">
+    <form v-for="(item, index) in komenlists" >
+      <br><br><button @click="tambahScore(index)" v-model:value="score">+</button>
+      <p style="line-height: 0%;">{{ item.isi }} || {{ item.tanggal }} || score {{ item.score }}</p>
+      <button @click="kurangScore(index)">-</button><br>
+    </form>
+    <br><br><textarea cols="40" rows="10" placeholder="Ketik Komentar Anda" v-model:value="newKomen" @keyup.enter="addKomen"></textarea>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        newKomen: "",
+        komenlists: [
+            {isi: "komentar 1 komentar 1 komentar 1", tanggal: "29-07-2021", score: 0},
+            {isi: "komentar 2 komentar 2 komentar 2", tanggal: "28-07-2021", score: 5},
+            {isi: "komentar 3 komentar 3 komentar 3", tanggal: "27-07-2021", score: 5},
+        ],
+      },
+      methods: {
+          addKomen: function(){
+            this.komenlists.push({'isi': this.newKomen, 'tanggal': "27-07-2021", 'score': 0});
+            this.newKomen = "";
+          },
+          tambahScore: function(index){
+            this.komenlists.score = 0 + 1;
+            event.preventDefault();
+          },
+          kurangScore: function(index){
+            this.komenlist.score = this.score + 1;
+            event.preventDefault();
+          },
+      }
+    })
+  </script>
+</body>
+
+</html>
