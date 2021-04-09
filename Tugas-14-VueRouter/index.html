@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+      <h1>Tugas 14 VueRouter</h1>
+      <h3>Daftar Halaman</h3>
+      <router-link to="/">Halaman 1</router-link>
+      <router-link to="/halaman2">Halaman 2</router-link>        
+      <router-link to="/halaman3">Halaman 3</router-link>        
+      <hr>
+      <router-view></router-view>
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  
+  <script type="module">
+
+    import { Halaman3Component } from './Halaman3Component.js'
+    import { CategoryComponent } from './CategoryComponent.js'
+
+    const Halaman1 = { template: '<div><h3>Welcome</h3><h4>Ini Halaman 1</h4></div>' }
+    const Halaman2 = { template: `
+        <div>
+            <h3>Quotes</h3>
+            <ul>
+                <li> Bekerjalah untuk akhiratmu seolah-olah kamu akan mati esok hari, dan bekerjalan untuk kehidupan duniamu seolah-olah kamu akan hidup selamanya</li>
+                <li> Jika engkau telah menguasai musuhmu, maafkanlah mereka, karena perbuatan itu adalah syukur kepada keberhasilan yg telah kau peroleh.</li>
+                <li> Aku tidaklah diciptakan untuk disibukkan dengan makanan-makanan yang enak, seperti binatang ternak. </li>
+            </ul>
+        </div>
+    `  }
+
+    const routes = [
+        { path: '/', component: Halaman1, alias: '/halaman1' },
+        { path: '/halaman2', component: Halaman2, meta: { login: true} },
+        { path: '/halaman3', component: Halaman3Component, meta: {admin: true}},
+        { path: '/category/:id', component: CategoryComponent },
+        { path: '*', redirect: '/' }
+
+    ]
+
+    const router = new VueRouter({
+      routes 
+    })
+
+    // router.beforeEach((to, from, next) => {
+    //   if(to.macthed.some(record => record.meta.login)){
+    //     let auth = true;
+    //     if(!auth){
+    //       alert('Halaman ini hanya untuk user yang sudah login')
+    //       next(false)
+    //     }else{
+    //       next()
+    //       alert('Berhasil Masuk')
+    //     }
+    //   }
+    // })
+
+    // router.beforeEach((to, from, next) => {
+    //   if(to.macthed.some(record => record.meta.admin)){
+    //     let auth = true;
+    //     if(!auth){
+    //       alert('Halaman ini hanya untuk user yang sudah admin')
+    //       next(false)
+    //     }else{
+    //       next()
+    //       alert('Berhasil Masuk')
+    //     }
+    //   }
+    // })
+
+    var vm = new Vue({ 
+    el: '#app', 
+    router, 
+    })
+
+    
+  </script>
+</body>
+</html>
